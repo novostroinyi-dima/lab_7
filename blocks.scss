@@ -1,0 +1,119 @@
+// Міксини для спільного використання
+@mixin center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-shadow($color) {
+  text-shadow: 1px 1px 2px $color;
+}
+
+.header {
+  @include center-content;
+  height: $header-height;
+  background: $primary-color;
+  text-align: center;
+  color: $secondary-color;
+
+  &__content {
+    max-width: 600px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5em;
+    @include text-shadow(#000);
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__image-container {
+      margin-bottom: 1.5rem;
+      img {
+        max-width: 200px;
+      }
+    }
+
+    &__message {
+      background: $secondary-color;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    &__text {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $font-color;
+    }
+  }
+}
+
+.footer {
+  height: $footer-height;
+  background: $primary-color;
+  @include center-content;
+
+  &__copy {
+    color: $secondary-color;
+    font-size: 0.9rem;
+  }
+}
+
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  pointer-events: none;
+  overflow:hidden;
+
+  &::before,
+  &::after {
+    content:'';
+    position:absolute;
+    top:-10%;
+    width:100%;
+    height:100%;
+    background:
+      radial-gradient($secondary-color 2px, transparent 2px),
+      radial-gradient($secondary-color 2px, transparent 2px);
+    background-size: 50px 50px;
+    animation: snow-fall 10s linear infinite;
+  }
+
+  &::before {
+    left:0;
+    background-position: 0 0, 25px 25px;
+  }
+
+  &::after {
+    left: 50%;
+    opacity:0.5;
+    background-position: 0 0,25px 25px;
+    animation-delay:5s;
+  }
+}
+
+@keyframes snow-fall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
